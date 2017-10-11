@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Путь к простоте</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="static/img/favicon-32x32.png">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/fonts/icofont/css/icofont.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+.center[
+    # Путь к [простоте]()
+]
+
+.center[
+    ### как Haskell облегчает<br/>сопровождение кода
+]
+
+.me[
+    Денис Шевченко <span class="at">@</span> IOHK
+]
+
+???
+
+Приветствую вас! Я Денис Шевченко. И сегодня мы узнаем больше о простоте.
+
+
+---
+
+
+.intro-quote-top-mark[
+    <i class="icofont icofont-quote-left"></i>
+]
+
+## Простота &mdash;<br/>результат [зрелости]().
+
+.intro-quote-bottom-mark[
+    <i class="icofont icofont-quote-right"></i>
+]
+
+.intro-quote-author[
+    &mdash; Фридрих Шиллер
+]
+
+???
+
+К простоте приходят не сразу, она является нам как откровение, и лишь с опытом.
+
+
+---
+
+
+class: middle
+
+.maintainability-is-simplicity[
+    сопровождение&nbsp;&nbsp;[&hArr;]()&nbsp;&nbsp;простота
+]
+
+???
+
+Вы удивитесь, но у понятия сопровождаемость кода есть официальное определение,
+введённое Институтом Инженеров Электротехники и Электроники.
+Сопровождаемость - это простота починки кода, рефакторинга кода и развития кода.
+
+
+---
+
+
+class: middle
+
+.maintainability-is-simplicity[
+    сопровождение&nbsp;&nbsp;[&hArr;]()&nbsp;&nbsp;простота
+]
+
+.fix[
+    <i class="icofont icofont-fix-tools"></i>
+]
+
+.refactoring[
+    <i class="icofont icofont-paint-brush"></i>
+]
+
+.improvement[
+    <i class="icofont icofont-trowel"></i>
+]
+
+
+---
+
+
+class: middle
+
+.maintainability-is-simplicity[
+    сопровождение&nbsp;&nbsp;[&hArr;]()&nbsp;&nbsp;простота
+]
+
+.simplicity[
+    <i class="icofont icofont-idea"></i>
+]
+
+???
+
+Простота - это ключевая идея сопровождения, потому что мы не можем
+чинить то, чего не понимаем, не можем рефакторить то, чего не понимаем
+и уж тем более не можем развивать то, чего не понимаем.
+
+
+---
+
+
+.computer[
+    <i class="icofont icofont-laptop-alt"></i>
+]
+
+.to-computer[
+    <i class="icofont icofont-swoosh-left"></i>
+]
+
+.letter[
+    [<i class="icofont icofont-paper"></i>]()
+]
+
+.to-human[
+    <i class="icofont icofont-swoosh-right"></i>
+]
+
+.human[
+    <i class="icofont icofont-man-in-glasses"></i>
+]
+
+???
+
+И мы адресуем это письмо как компьютеру, так и человеку, но проблема в том,
+что компьютер не равен человеку. Код не может быть непонятным для компьютера:
+компьютер предельно просто судит о коде - корректный или некорректный. Но для
+человека код может быть непонятным, даже если объективно код корректен.
+
+
+---
+
+
+class: how-to
+
+[<i class="icofont icofont-question-circle"></i>]()&nbsp;&nbsp;Как не забыть зашифровать
+
+[<i class="icofont icofont-question-circle"></i>]()&nbsp;&nbsp;Как не запустить ракеты
+
+[<i class="icofont icofont-question-circle"></i>]()&nbsp;&nbsp;Как типы страницу строят
+
+
+---
+
+
+## Haskell?
+
+
+---
+
+
+## Haskell?
+
+.functional[[_&fnof;(x)_]()]
+
+
+---
+
+
+## Haskell?
+
+.functional[[_&fnof;(x)_]()]
+.native[[<i class="icofont icofont-ui-settings"></i>]()]
+
+
+---
+
+
+## Haskell?
+
+.functional[[_&fnof;(x)_]()]
+.native[[<i class="icofont icofont-ui-settings"></i>]()]
+.strong[[&Tau;<i class="icofont icofont-tick-mark"></i>]()]
+
+
+---
+
+
+.types[
+    [<i class="icofont icofont-wrench"></i>]()
+    Типы
+]
+
+.purity[
+    [<i class="icofont icofont-wrench"></i>]()
+    Чистота
+]
+
+.pattern-matching[
+    [<i class="icofont icofont-wrench"></i>]()
+    Pattern-matching
+]
+
+
+---
+
+
+class: middle
+
+### Основано на<br/>[реальных]() событиях&hellip;
+
+
+---
+
+
+class: middle
+
+### Мы точно зашифровали?!
+
+
+---
+
+
+class: editor
+
+```cpp
+class Message {
+  std::string message;
+public:
+  Message (const std::string& msg);
+  std::string getMessage() const;
+};
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data Message = Message Text
+```
+
+
+---
+
+
+class: editor
+
+```cpp
+class Message {
+  std::string message;
+* bool encrypted = false;
+public:
+  Message (const std::string& msg);
+  std::string getMessage() const;
+  
+  bool isEncrypted() const;
+  void encrypt();
+  void decrypt();
+};
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data Message = Plain Text
+             | Encrypted Text
+
+encrypt :: Message -> Message
+
+decrypt :: Message -> Message
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+main :: IO ()
+main = send secret "info@youcon.ru"
+  where
+    secret = encrypt plain
+*   plain = Plain "Hi Saratov!"
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+main :: IO ()
+main = send secret "info@youcon.ru"
+  where
+*   secret = Encrypted $
+      readFile "/tmp/encrypted.msg"
+```
+
+
+---
+
+
+class: editor
+
+```cpp
+void
+send (const Message& msg,
+      const Recipient& recipient) {
+* if (msg.isEncrypted())
+    realSending(msg.getMessage(),
+                recipient);
+  else
+    throw SendException
+      ("Unencrypted message!");
+}
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+send :: Message
+     -> Recipient
+     -> IO ()
+send (Encrypted text) recipient =
+  realSending text recipient
+send (Plain _) _ =
+  throw SendUnencryptedMessage
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data Message state = Message Text
+
+-- Состояния сообщения
+data Plain
+data Encrypted
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+encrypt :: Message Plain
+        -> Message Encrypted
+
+decrypt :: Message Encrypted
+        -> Message Plain
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+send :: Message Encrypted
+     -> Recipient
+     -> IO ()
+send (Message text) recipient =
+  realSending text recipient
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data Message state = Message Text
+
+-- Состояния сообщения
+data Plain
+data Encrypted
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data Message state = Message Text
+
+-- Состояния сообщения
+data Plain
+data Encrypted
+*data InBase64
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+messageLength :: Message state
+              -> Int
+messageLength (Message text) =
+  length text
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+messageLength :: Message state
+              -> Int
+messageLength (Message text) =
+  length text
+
+toBase64 :: Message state
+         -> Message InBase64
+toBase64 (Message text) =
+  Message $ encode text
+```
+
+---
+
+
+class: middle
+
+### А что там с ракетами?
+
+
+---
+
+class: editor
+
+```cpp
+std::vector<Result>
+calculate (const FoodInfo& info,
+           const Food& commonFood);
+```
+
+???
+
+Объявление говорит нам о том, что на входе и на выходе,
+но оно ничего не сообщает о том, что происходит внутри
+этой функции.
+
+
+---
+
+
+class: editor
+
+```cpp
+std::vector<Result>
+calculate (const FoodInfo& info,
+           const Food& commonFood);
+```
+
+.black-box[
+    <i class="icofont icofont-box"></i>
+]
+
+???
+
+Для нас это чёрный ящик. Откуда берётся этот обработчик? Возвращается
+из объекта? Запрашивается из БД? Скачивается с сервера? Читается из файла?
+
+
+---
+
+
+class: editor
+
+```haskell
+calculate :: FoodInfo
+          -> Food
+          -> [Result]
+```
+
+.woohoo[
+    <i class="icofont icofont-sun-alt"></i>
+]
+
+???
+
+Зная характеристики типов, с которыми работает функция, мы точно знаем,
+чего ожидать от этой функции и чего от неё нельзя ожидать. Таким образом,
+функция не способна преподнести нам сюрпризы.
+
+
+---
+
+
+class: editor
+
+```haskell
+calculate :: FoodInfo
+          -> Food
+*         -> IO [Result]
+```
+
+.hmmm[
+    <i class="icofont icofont-full-sunny"></i>
+]
+
+???
+
+А вот здесь мы уже знаем, что функция работает с внешним миром, будьте внимательны!
+Таким образом, благодаря чистоте объявление функции точно говорит нам о том, чего
+можно ждать от конкретной функции.
+
+
+---
+
+
+class: editor
+
+```cpp
+double calc_sin (double degree) {
+  return sin (degree * PI / 180);
+}
+```
+
+
+---
+
+
+class: editor
+
+```cpp
+double calc_sin (double degree) {
+* launch_missiles();
+  return sin (degree * PI / 180);
+}
+```
+
+.missiles[
+    <i class="icofont icofont-skull-face"></i>
+]
+
+
+---
+
+
+class: editor
+
+```cpp
+double calc_sin (double degree) {
+* should_I_launch_missiles = true;
+  return sin (degree * PI / 180);
+}
+```
+
+.missiles[
+    <i class="icofont icofont-skull-face"></i>
+]
+
+???
+
+Любая гарантия проистекает из ограничений. Если мы в чём-то уверены, 
+это значит, что нам чего-то нельзя. Там же, где вседозволенность,
+нет никаких гарантий вообще.
+
+
+---
+
+
+class: middle
+
+### А теперь про страницу&hellip;
+
+
+---
+
+
+class: editor
+
+```haskell
+".buy-form" ? do
+  margin     (em 0) auto
+  maxWidth   (em 30.0)
+  paddingTop (em 4.0)
+  fontFamily ["Roboto"] [sansSerif]
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+body $
+  div ! class_ "container" $
+    div ! class_ ".buy-form"
+      ...
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data ClassName
+  = LanguageSwitcher
+  | CurrentLanguage
+* | BuyForm
+  ...
+  | Copyright
+  | SocialButtons
+  deriving (Show)
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+data ClassName
+  = LanguageSwitcher
+  | CurrentLanguage
+  | BuyForm
+  ...
+  | Copyright
+  | SocialButtons
+* deriving (Show)
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+*cl_ BuyForm ? do
+  margin     (em 0) auto
+  maxWidth   (em 30.0)
+  paddingTop (em 4.0)
+  fontFamily ["Roboto"] [sansSerif]
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+body $
+  div ! class_ "container" $
+*   div ! class_ (toValue BuyForm)
+      ...
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+body $
+  div ! class_ "container" $
+*   div ! class_ (toValue BuyForm)
+      ...
+```
+
+.produces-html[
+    <i class="icofont icofont-swoosh-down"></i>
+]
+
+```html
+<body>
+  <div class="container">
+*   <div class="BuyForm">
+      ...
+```
+
+
+---
+
+
+class: middle
+
+### Страница [три]()-в-одной&hellip;
+
+
+---
+
+
+class: editor
+
+```haskell
+data PaymentPage
+  = ShowPaymentInfo
+      ExpirationTime
+      PaymentDetails
+      SuccessURL
+      CancelURL
+  | ShowInvoiceStatus
+      InvoiceStatus
+  | NoSuchInvoice
+```
+
+
+---
+
+
+class: editor
+
+```haskell
+buildPaymentPage :: PaymentPage
+                 -> Html
+buildPaymentPage
+  (ShowPaymentInfo ...)   = -- &#8544;
+buildPaymentPage
+  (ShowInvoiceStatus ...) = -- &#8545;
+buildPaymentPage
+  NoSuchInvoice           = -- &#8546;
+```
+
+
+---
+
+
+.types[
+    [<i class="icofont icofont-thumbs-up"></i>]()
+    Типы
+]
+
+.purity[
+    [<i class="icofont icofont-thumbs-up"></i>]()
+    Чистота
+]
+
+.pattern-matching[
+    [<i class="icofont icofont-thumbs-up"></i>]()
+    Pattern-matching
+]
+
+
+---
+
+
+class: middle
+
+## [Ваши]() вопросы&hellip;
+
+---
+
+
+class: middle, center
+
+## Благодарю!
+
+.ruhaskell[
+    [ruhaskell.org](https://ruhaskell.org/)
+]
+
+    </textarea>
+
+    <script src="static/js/remark-latest.min.js"></script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'github',
+          highlightLines: true
+        }) ;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,313 @@
+@font-face {
+    font-family: 'Arsenal';
+    src: url('../fonts/Arsenal/Arsenal-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Code Pro';
+    src: url('../fonts/SourceCodePro/SourceCodePro-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Code Pro';
+    src: url('../fonts/SourceCodePro/SourceCodePro-Semibold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Arsenal';
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 5.8em !important;
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 4.0em !important;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 3.3em !important;
+}
+
+a:link {
+    text-decoration: none;
+    color: #429fca;
+    text-shadow: 2px 2px 6px #ccc;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #429fca;
+    text-shadow: 2px 2px 6px #ccc;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #429fca;
+    text-shadow: 2px 2px 6px #ccc;
+}
+
+a:active {
+    text-decoration: none;
+    color: #429fca;
+    text-shadow: 2px 2px 6px #ccc;
+}
+
+.remark-slides-area {
+    background-image: url("../img/background.png");
+}
+
+.remark-slide-content {
+    padding: 1em 2.3em 1em 2.3em !important;
+}
+
+.remark-slide>.middle {
+    vertical-align: 0 !important;
+    padding-top: 4em !important;
+}
+
+.hljs-default .hljs {
+    padding: 0.01em;
+    background: #fdf6e3;
+}
+
+.hljs-github .hljs {
+    background: #fdf6e3;
+    padding-left: 0em;
+    padding-right: 0em;
+}
+
+.hljs-github .hljs-comment, .hljs-github .hljs-quote {
+    color: #999;
+    font-style: normal;
+}
+
+.remark-code {
+    font-family: 'Source Code Pro';
+    font-size: 1.92em;
+}
+
+.remark-slide-number {
+    display: none !important;
+}
+
+.remark-inline-code {
+    font-family: 'Source Code Pro';
+}
+
+.center {
+    text-align: center !important;
+}
+
+.editor {
+    background: #fdf6e3;
+    padding-top: 1.0em !important;
+}
+
+.stack-editor {
+    font-size: 2.0em !important;
+}
+
+.haskell-logo-init {
+    max-width: 1.6em;
+    padding-left: 0.39em;
+    padding-right: 0.39em;
+}
+
+.functional {
+    font-size: 5.9em;
+    padding-left: 0.15em;
+    padding-right: 1.2em;
+}
+
+.native {
+    font-size: 5.4em;
+    padding-right: 1.2em;
+}
+
+.strong {
+    font-size: 5.9em;
+}
+
+.at {
+    color: #999;
+}
+
+.me {
+    padding-bottom: 1.0em;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.intro-quote-top-mark {
+    color: #ccc;
+    font-size: 3.5em;
+    margin-bottom: -1.2em;
+    padding-left: 0.04em;
+}
+
+.intro-quote-bottom-mark {
+    color: #ccc;
+    font-size: 3.5em;
+    text-align: right;
+    padding-right: 2.24em;
+    margin-top: -1.2em;
+}
+
+.intro-quote-author {
+    text-align: right;
+    font-size: 1.4em;
+    padding-right: 5.8em;
+}
+
+.computer {
+    float: left;
+    font-size: 10em;
+    padding-left: 0.18em;
+    margin-top: -0.7em;
+}
+
+.to-computer {
+    float: left;
+    font-size: 4em;
+    color: #999;
+    padding-left: 0.2em;
+    padding-right: 0.02em;
+    margin-top: 0.7em;
+}
+
+.letter {
+    float: left;
+    font-size: 7.0em;
+    text-align: center;
+    margin-top: -0.3em;
+}
+
+.to-human {
+    float: left;
+    font-size: 4em;
+    color: #999;
+    padding-left: 0.1em;
+    padding-right: 0.2em;
+    margin-top: 0.7em;
+}
+
+.human {
+    font-size: 9.0em;
+    margin-top: -0.77em;
+}
+
+.fix {
+    float: left;
+    font-size: 10.5em;
+    margin-top: -0.95em;
+    color: #16174f;
+}
+
+.refactoring {
+    float: left;
+    font-size: 10.5em;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    margin-top: -0.95em;
+    color: #f97d0b;
+}
+
+.improvement {
+    font-size: 10.5em;
+    float: left;
+    margin-top: -0.95em;
+    color: #004d00;
+}
+
+.maintainability-is-simplicity {
+    font-size: 3.35em;
+}
+
+.simplicity {
+    margin-top: -0.95em;
+    font-size: 14.5em;
+    color: #ffb80a;
+    text-align: center;
+}
+
+.types {
+    margin-top: -0.8em;
+    font-size: 4.9em;
+    -webkit-transform: rotate(-16deg);
+    -moz-transform: rotate(-16deg);
+    -ms-transform: rotate(-16deg);
+    -o-transform: rotate(-16deg);
+}
+
+.purity {
+    font-size: 3.9em;
+    padding-left: 2.115em;
+    margin-top: -0.1em;
+    -webkit-transform: rotate(-16deg);
+    -moz-transform: rotate(-16deg);
+    -ms-transform: rotate(-16deg);
+    -o-transform: rotate(-16deg);
+}
+
+.pattern-matching {
+    font-size: 3.0em;
+    padding-left: 5.0em;
+    -webkit-transform: rotate(-16deg);
+    -moz-transform: rotate(-16deg);
+    -ms-transform: rotate(-16deg);
+    -o-transform: rotate(-16deg);
+}
+
+.ruhaskell {
+    padding-top: 0.1em;
+    font-size: 3.65em;
+}
+
+.black-box {
+    text-align: center;
+    margin-top: -0.6em;
+    font-size: 10.6em;
+}
+
+.missiles {
+    text-align: center;
+    margin-top: -0.7em;
+    font-size: 9.1em;
+}
+
+.woohoo {
+    text-align: center;
+    margin-top: -0.6em;
+    font-size: 9.6em;
+    color: #ffb80a;
+}
+
+.hmmm {
+    text-align: center;
+    margin-top: -0.6em;
+    font-size: 9.6em;
+    color: #888;
+}
+
+.how-to {
+    font-size: 3.1em;
+    padding-top: 1.5em !important;
+}
+
+.produces-html {
+    text-align: center;
+    font-size: 3.1em;
+    margin-top: -0.6em;
+    margin-bottom: -0.6em;
+    color: #999;
+}
